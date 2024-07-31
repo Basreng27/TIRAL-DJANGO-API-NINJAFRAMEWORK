@@ -1,0 +1,50 @@
+=> Langkah - Langkah
+    => Buat Virtual Environment
+        python -m venv env
+    => Aktifkan Virtual Environment
+        env\Scripts\activate
+    => Install Django, Django Ninja, PyJWT
+        pip install django django-ninja pyjwt
+    => Install Untk koneksi Ke SQL Server
+        pip install mssql-django
+    => Buat Proyek Django
+        django-admin startproject projectAPI
+    => Masuk Proyek projectAPI
+        cd projectAPI
+    => Buat Aplikasi Django
+        python manage.py startapp apininjaframework
+    => Tambahkan Aplikasi ke INSTALLED_APPS
+        Edit file settings.py dan tambahkan apininjaframework ke INSTALLED_APPS
+            INSTALLED_APPS = [
+                ...
+                'apininjaframework',
+                'ninja',
+            ]
+    => Konfigurasi Database
+        Edit file settings.py
+            DATABASES = {
+                'default': {
+                    # 'ENGINE': 'sql_server.pyodbc',
+                    'ENGINE': 'mssql',
+                    # 'NAME': 'komik',
+                    'NAME': 'komik_api_restframework',
+                    'USER': '',  # Kosongkan karena menggunakan Windows Authentication
+                    'PASSWORD': '',  # Kosongkan karena menggunakan Windows Authentication
+                    'HOST': r'localhost\MSSQLSERVER01',  # Nama atau IP dari server SQL Server Anda
+                    'PORT': '',  # Biasanya kosong untuk default port
+                    'OPTIONS': {
+                        'driver': 'ODBC Driver 17 for SQL Server',  # Pastikan driver ini terinstal
+                        'extra_params': 'TrustServerCertificate=yes;'
+                    },
+                },
+            }
+    => Buat API dengan Django Ninja
+        Buat File api.py di Dalam Folder apininjaframework
+    => Perbarui URL Proyek
+        Edit file urls.py di folder projectAPI
+    => Buat Migrate
+        python manage.py makemigrations
+    => Jalankan Migrate
+        python manage.py migrate
+    => Run Server
+        python manage.py runserver
